@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { useAuth } from "../auth/AuthContext";
-
+import { useAuth } from "../../components/auth/AuthContext";
+import './LoginComponent.css';
 
 
 const LoginComponent: React.FC = () => {
@@ -26,7 +26,7 @@ const LoginComponent: React.FC = () => {
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-postadress" id="email" /><br />
                 <label htmlFor="password">Lösenord:</label>
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Lösenord" id="password" /><br />
-                <button type="submit">Login</button>
+                <button className="login-button" type="submit">Login</button>
             </form>
         </div>
     );

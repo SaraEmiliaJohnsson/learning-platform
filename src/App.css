@@ -12,23 +12,3 @@ body {
     align-items: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
-.login-heading {
-    margin: 28px;
-}
-
-.login-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    line-height: 1.5;
-}
