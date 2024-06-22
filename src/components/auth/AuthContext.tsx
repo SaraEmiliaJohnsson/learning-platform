@@ -1,12 +1,14 @@
-import { UserCredential, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { User, UserCredential, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../firebase/FirebaseConfig";
+import { auth, db } from "../firebase/FirebaseConfig";
+import { doc, setDoc } from "firebase/firestore";
 
 
 interface AuthContextType {
-    currentUser: any;
+    currentUser: User | null;
     login: (email: string, password: string) => Promise<UserCredential>;
     logout: () => Promise<void>;
+    register: (email: string, password: string, role: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -20,7 +22,7 @@ export const useAuth = () => {
 };
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState<any>(null);
+    const [currentUser, setCurrentUser] = useState<User | null>(null);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -37,9 +39,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return signOut(auth);
     };
 
+    const register = async (email: string, password: string, role: string) => {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        await setDoc(doc(db, 'users', user.uid), {
+            email: user.email,
+            role: role,
+        });
+    };
+
     return (
         <AuthContext.Provider value={{
-            currentUser, login, logout
+            currentUser, login, logout, register
         }}>
             {children}
         </AuthContext.Provider>
