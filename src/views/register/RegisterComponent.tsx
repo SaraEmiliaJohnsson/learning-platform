@@ -18,10 +18,20 @@ const RegisterComponent: React.FC = () => {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
+
+            console.log("User ID:", user.uid);
+
             await setDoc(doc(db, 'users', user.uid), {
                 email: user.email,
                 role: role,
             });
+
+            const roleCollection = role === 'student' ? 'students' : 'teachers';
+            await setDoc(doc(db, roleCollection, user.uid), {
+                email: user.email,
+                role: role,
+            });
+
             await login(email, password);
         } catch (error) {
             console.error('Failed to create account', error);
@@ -35,7 +45,7 @@ const RegisterComponent: React.FC = () => {
                 <label htmlFor="email">E-postadress:</label>
                 <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-postadress.." />
                 <label htmlFor="password">Lösenord:</label>
-                <input type="password" id="password" value={password} onChange={(e) => setEmail(e.target.value)} placeholder="Lösenord.." />
+                <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Lösenord.." />
                 <select className="select" value={role} onChange={(e) => setRole(e.target.value)}>
                     <option value="student">Student</option>
                     <option value="teacher">Lärare</option>

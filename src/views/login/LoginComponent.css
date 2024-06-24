@@ -24,3 +24,9 @@
     border-radius: 5px;
     font-weight: 600;
 }
+
+input {
+    padding: 5px;
+    border-radius: 8px;
+    width: 300px;
+}
