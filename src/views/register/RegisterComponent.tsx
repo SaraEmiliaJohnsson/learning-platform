@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../components/firebase/FirebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
 import './RegisterComponent.css';
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -12,6 +13,7 @@ const RegisterComponent: React.FC = () => {
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('student');
     const { login } = useAuth();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -33,6 +35,13 @@ const RegisterComponent: React.FC = () => {
             });
 
             await login(email, password);
+
+
+            if (role === 'student') {
+                navigate('/student');
+            } else if (role === 'teacher') {
+                navigate('/teacher');
+            }
         } catch (error) {
             console.error('Failed to create account', error);
         }
