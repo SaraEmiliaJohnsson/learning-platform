@@ -1,17 +1,31 @@
 import { useState } from "react"
 import { useAuth } from "../../components/auth/AuthContext";
 import './LoginComponent.css';
+import { useNavigate } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../components/firebase/FirebaseConfig";
 
 
 const LoginComponent: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { login } = useAuth();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
             await login(email, password);
+            console.log('Inloggad');
+
+            const userDoc = await getDoc(doc(db, 'users', auth.currentUser!.uid));
+            const userRole = userDoc.data()?.role;
+
+            if (userRole === 'student') {
+                navigate('/student');
+            } else if (userRole === 'teacher') {
+                navigate('/teacher');
+            }
         } catch (error) {
             console.error('Failed to log in', error);
         }
