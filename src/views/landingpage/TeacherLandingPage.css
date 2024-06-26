@@ -1,0 +1,13 @@
+
+.teacher-landingpage-wrapper {
+    width: 100vw;
+    position: relative;
+}
+.landingpage-header {
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
