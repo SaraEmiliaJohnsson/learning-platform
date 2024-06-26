@@ -1,6 +1,7 @@
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../components/firebase/FirebaseConfig";
+import './TeacherLandingPage.css';
 
 
 
@@ -20,9 +21,14 @@ const TeacherLandingPage = () => {
 
 
     return (
-        <section>
-            <h2>Lärarens sida</h2>
-            <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
+        <section className="teacher-landingpage-wrapper">
+            <header className="landingpage-header">
+                <h2>Lärarens sida</h2>
+            </header>
+            <main className="landingpage-main">
+                <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
+            </main>
+
         </section>
     )
 }
