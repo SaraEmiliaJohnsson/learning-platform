@@ -40,7 +40,7 @@ const LoginComponent: React.FC = () => {
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-postadress" id="email" /><br />
                 <label htmlFor="password">Lösenord:</label>
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Lösenord" id="password" /><br />
-                <button className="login-button" type="submit">Login</button>
+                <button className="login-button" type="submit">Logga in</button>
             </form>
         </div>
     );

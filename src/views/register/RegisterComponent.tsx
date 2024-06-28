@@ -49,7 +49,7 @@ const RegisterComponent: React.FC = () => {
 
     return (
         <section className="register-container">
-            <h2 className="register-heading">Registrera dig här för att skapa ett konto på StudyWay</h2>
+            <h2 className="register-heading">Registrera dig här för att skapa ett konto <br /> på StudyWay</h2>
             <form className="form" onSubmit={handleSubmit}>
                 <label htmlFor="email">E-postadress:</label>
                 <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-postadress.." />
