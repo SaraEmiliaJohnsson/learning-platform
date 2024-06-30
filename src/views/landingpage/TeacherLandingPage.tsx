@@ -24,9 +24,10 @@ const TeacherLandingPage = () => {
         <section className="teacher-landingpage-wrapper">
             <header className="landingpage-header">
                 <h2>Lärarens sida</h2>
+                <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
             </header>
             <main className="landingpage-main">
-                <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
+
             </main>
 
         </section>

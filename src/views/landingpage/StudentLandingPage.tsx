@@ -1,13 +1,14 @@
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../components/firebase/FirebaseConfig";
+import './StudentLandingPage.css';
 
 
 
 const StudentLandingPage = () => {
     const navigate = useNavigate();
 
-    const handleLogout = async () => {
+    const handleSignOut = async () => {
 
 
         try {
@@ -21,10 +22,15 @@ const StudentLandingPage = () => {
     }
 
     return (
-        <section>
-            <h2>Elev sida</h2>
+        <section className="student-landingpage-wrapper">
+            <header className="landingpage-header">
+                <h2>Studerande sidan</h2>
+                <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
+            </header>
+            <main className="landingpage-main">
 
-            <button className="logout-button" onClick={handleLogout}>Logga ut</button>
+            </main>
+
         </section>
     )
 }
