@@ -12,7 +12,7 @@ const App: React.FC = () => {
     <Router>
       <AuthProvider>
         <Routes>
-          <Route path='/login' element={<LoginComponent />} />
+          <Route path='/' element={<LoginComponent />} />
           <Route path='/register' element={<RegisterComponent />} />
           <Route path='/student' element={<StudentLandingPage />} />
           <Route path='/teacher' element={<TeacherLandingPage />} />
