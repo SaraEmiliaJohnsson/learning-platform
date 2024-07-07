@@ -1,22 +1,21 @@
 .student-landingpage-wrapper {
     width: 100vw;
-    position: relative;
+    height: 100vh;
 }
 .landingpage-header {
     width: 100%;
     height: 100px;
-    position: absolute;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px;
+    padding: 1rem;
+    background-color: #d8e4ff;
+    border-bottom: 1px solid #35605a;
 }
 
-.landingpage-main {
-    height: 100vh;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+
+.landingpage-header h2 {
+    margin: 0;
 }
 
 .logout-button {
@@ -25,4 +24,57 @@
     padding: 10px;
     border-radius: 6px;
     border: 1.5px solid #31E981;
+    margin-right: 1rem;
+}
+
+.header-button-student {
+    background-color: #00120B;
+    color: #31E981;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1.5px solid #31E981;
+    margin-right: 1rem;
+}
+
+.header-button-student:hover {
+    background-color: #31E981;
+    color: #00120B;
+    border: 1.5px solid #00120B;
+}
+
+.logout-button:hover {
+    background-color: #31E981;
+    color: #00120B;
+    border: 1.5px solid #00120B;
+}
+
+.landingpage-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 1rem;
+    overflow-y: auto;
+    margin-left: 2rem;
+    padding-top: 10rem;
+}
+
+.ongoing-courses {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.course-card {
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+
+.course-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

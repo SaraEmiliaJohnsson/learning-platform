@@ -62,36 +62,47 @@ const StudentLandingPage: React.FC = () => {
     const handleSignOut = async () => {
         try {
             await signOut(auth);
-            navigate('/login');
+            navigate('/');
             console.log('Utloggad');
         } catch (error) {
             console.error('Failed to log out', error);
         }
     };
 
+    const handleCourseClick = (courseId: string) => {
+        navigate(`/course/${courseId}`);
+    };
+
+    const handleMessagesClick = () => {
+        navigate('/messages');
+    };
+
+    const handleCompletedCoursesClick = () => {
+        navigate('/completed-courses');
+    };
+
+
     return (
         <section className="student-landingpage-wrapper">
             <header className="landingpage-header">
                 <h2>Studerande sidan</h2>
+                <button className="header-button-student" onClick={handleCompletedCoursesClick}>Avslutade Kurser</button>
+                <button className="header-button-student" onClick={handleMessagesClick}>Meddelanden</button>
                 <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
             </header>
             <main className="landingpage-main">
-                <div>
+                <div className="ongoing-courses">
                     <h3>Pågående Kurser</h3>
-                    <ul>
-                        {courses.map((course) => (
-                            <li key={course.id}>{course.title}</li>
-                        ))}
-                    </ul>
+
+                    {courses.map((course) => (
+                        <div key={course.id} className="course-card" onClick={(() => handleCourseClick(course.id))}>
+                            <h4>{course.title}</h4>
+                            <p>{course.description}</p>
+                        </div>
+                    ))}
+
                 </div>
-                <div>
-                    <h3>Avslutade Kurser</h3>
-                    <ul>
-                        {completedCourses.map((course) => (
-                            <li key={course.id}>{course.title}</li>
-                        ))}
-                    </ul>
-                </div>
+
             </main>
         </section>
     );
