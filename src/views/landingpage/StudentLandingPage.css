@@ -27,7 +27,7 @@
     margin-right: 1rem;
 }
 
-.header-button {
+.header-button-student {
     background-color: #00120B;
     color: #31E981;
     padding: 10px;
@@ -36,7 +36,7 @@
     margin-right: 1rem;
 }
 
-.header-button:hover {
+.header-button-student:hover {
     background-color: #31E981;
     color: #00120B;
     border: 1.5px solid #00120B;

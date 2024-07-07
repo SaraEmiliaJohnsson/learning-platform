@@ -62,7 +62,7 @@ const StudentLandingPage: React.FC = () => {
     const handleSignOut = async () => {
         try {
             await signOut(auth);
-            navigate('/login');
+            navigate('/');
             console.log('Utloggad');
         } catch (error) {
             console.error('Failed to log out', error);
@@ -86,8 +86,8 @@ const StudentLandingPage: React.FC = () => {
         <section className="student-landingpage-wrapper">
             <header className="landingpage-header">
                 <h2>Studerande sidan</h2>
-                <button className="header-button" onClick={handleCompletedCoursesClick}>Avslutade Kurser</button>
-                <button className="header-button" onClick={handleMessagesClick}>Meddelanden</button>
+                <button className="header-button-student" onClick={handleCompletedCoursesClick}>Avslutade Kurser</button>
+                <button className="header-button-student" onClick={handleMessagesClick}>Meddelanden</button>
                 <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
             </header>
             <main className="landingpage-main">
