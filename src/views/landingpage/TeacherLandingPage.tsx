@@ -25,6 +25,7 @@ const TeacherLandingPage = () => {
             <header className="landingpage-header">
                 <h2>Lärarens sida</h2>
                 <button className="header-button-teacher" onClick={() => navigate('/add-course')}>Lägg till Kurs</button>
+                <button className="header-button-teacher" onClick={() => navigate('/see-students')}>Registrerade Studenter</button>
                 <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
             </header>
             <main className="landingpage-main">
