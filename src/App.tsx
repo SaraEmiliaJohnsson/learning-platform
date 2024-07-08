@@ -7,6 +7,7 @@ import RegisterComponent from './views/register/RegisterComponent';
 import StudentLandingPage from './views/landingpage/StudentLandingPage';
 import TeacherLandingPage from './views/landingpage/TeacherLandingPage';
 import AddCoursePage from './views/addcoursepage/AddCoursePage';
+import ViewStudentsRegistered from './views/viewstudents/ViewStudentsRegistered';
 
 const App: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const App: React.FC = () => {
           <Route path='/student' element={<StudentLandingPage />} />
           <Route path='/teacher' element={<TeacherLandingPage />} />
           <Route path='/add-course' element={<AddCoursePage />} />
+          <Route path='/see-students' element={<ViewStudentsRegistered />} />
         </Routes>
 
       </AuthProvider>
