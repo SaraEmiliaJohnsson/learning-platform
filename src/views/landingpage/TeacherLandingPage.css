@@ -61,3 +61,22 @@
     margin-left: 2rem;
     padding-top: 10rem;
 }
+
+.courses-list {
+    list-style: none;
+    padding: 0;
+}
+
+.courses-list li {
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+    margin-bottom: 1rem;
+}
+
+.courses-list li:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

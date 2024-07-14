@@ -1,12 +1,36 @@
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../components/firebase/FirebaseConfig";
+import { auth, db } from "../../components/firebase/FirebaseConfig";
 import './TeacherLandingPage.css';
+import { useEffect, useState } from "react";
+import { Course } from "../../types";
+import { collection, doc, getDocs } from "firebase/firestore";
 
 
 
 const TeacherLandingPage = () => {
+    const [courses, setCourses] = useState<Course[]>([]);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchCourses = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, 'courses'));
+                const courseData: Course[] = [];
+                querySnapshot.forEach((doc) => {
+                    courseData.push({ id: doc.id, ...doc.data() } as Course);
+                });
+                setCourses(courseData);
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+            }
+        };
+        fetchCourses();
+    }, []);
+
+    const handleCourseClick = (courseId: string) => {
+        navigate(`/course/${courseId}`);
+    };
 
     const handleSignOut = async () => {
         try {
@@ -29,7 +53,14 @@ const TeacherLandingPage = () => {
                 <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
             </header>
             <main className="landingpage-main">
-
+                <h3>Pågående Kurser</h3>
+                <ul className="courses-list">
+                    {courses.map((course) => (
+                        <li key={course.id} onClick={() => handleCourseClick(course.id)}>
+                            {course.title}
+                        </li>
+                    ))}
+                </ul>
             </main>
 
         </section>
