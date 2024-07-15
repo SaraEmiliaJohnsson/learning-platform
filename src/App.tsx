@@ -8,6 +8,7 @@ import StudentLandingPage from './views/landingpage/StudentLandingPage';
 import TeacherLandingPage from './views/landingpage/TeacherLandingPage';
 import AddCoursePage from './views/addcoursepage/AddCoursePage';
 import ViewStudentsRegistered from './views/viewstudents/ViewStudentsRegistered';
+import CourseDetailsPage from './views/coursedetailspage/CourseDetailsPage';
 
 const App: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ const App: React.FC = () => {
           <Route path='/teacher' element={<TeacherLandingPage />} />
           <Route path='/add-course' element={<AddCoursePage />} />
           <Route path='/see-students' element={<ViewStudentsRegistered />} />
+          <Route path='/course/:courseId' element={<CourseDetailsPage />} />
         </Routes>
 
       </AuthProvider>
