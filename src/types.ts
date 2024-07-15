@@ -15,6 +15,14 @@ export interface Course {
     assignments: string[];
 }
 
+export interface Assignments {
+    id: string;
+    title: string;
+    description: string;
+    completed: boolean;
+    students: string[];
+}
+
 export interface Message {
     id: string;
     senderId: string;
