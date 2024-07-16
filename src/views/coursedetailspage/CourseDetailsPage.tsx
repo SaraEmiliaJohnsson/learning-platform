@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { Assignments, Student } from "../../types";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
-import { db } from "../../components/firebase/FirebaseConfig";
+import { auth, db } from "../../components/firebase/FirebaseConfig";
 import { useAuth } from "../../components/auth/AuthContext";
+import { signOut } from "firebase/auth";
+import './CourseDetailsPage.css';
+import { log } from "console";
 
 
 
@@ -13,6 +16,7 @@ const CourseDetailsPage: React.FC = () => {
     const [students, setStudents] = useState<Student[]>([]);
     const [assignments, setAssignments] = useState<Assignments[]>([]);
     const [courseTitle, setCourseTitle] = useState<String>('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCourseDetails = async () => {
@@ -22,11 +26,23 @@ const CourseDetailsPage: React.FC = () => {
             }
             try {
                 const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+                console.log('User Data:', userDoc.data());
+
                 if (userDoc.exists() && userDoc.data()?.role === 'teacher') {
                     const courseDoc = await getDoc(doc(db, 'courses', courseId));
                     if (courseDoc.exists()) {
-                        setCourseTitle(courseDoc.data().title);
+                        setCourseTitle(courseDoc.data()?.title || '');
+
+                        const studentIds = courseDoc.data()?.students || [];
                         const studentData: Student[] = [];
+
+                        for (const studentId of studentIds) {
+                            const studentDoc = await getDoc(doc(db, 'students', studentId));
+                            if (studentDoc.exists()) {
+                                studentData.push({ id: studentDoc.id, ...studentDoc.data() } as Student);
+                            }
+                        }
+
                         const assignmentsData: Assignments[] = [];
                         const studentSnapshot = await getDocs(collection(db, `courses/${courseId}/students`));
                         studentSnapshot.forEach((doc) => {
@@ -51,12 +67,29 @@ const CourseDetailsPage: React.FC = () => {
         fetchCourseDetails();
     }, [courseId, currentUser]);
 
+    const handleSignOut = async () => {
+        try {
+            await signOut(auth);
+            navigate('/');
+            console.log('Utloggad');
+
+        } catch (error) {
+            console.error('Failed to sign out', error);
+        }
+    }
+
+    const handleBackClick = () => {
+        navigate(-1);
+    }
+
     return (
         <div className="course-details-wrapper">
             <header className="course-details-header">
                 <h2>{courseTitle}</h2>
-                <button onClick={() => { /* Funktion för att lägga till uppgift */ }}>Lägg till Uppgift</button>
-                <button onClick={() => { /* Funktion för att lägga till lektion */ }}>Lägg till Lektion</button>
+                <button className="header-button-teacher" onClick={() => { /* Funktion för att lägga till uppgift */ }}>Lägg till Uppgift</button>
+                <button className="header-button-teacher" onClick={() => { /* Funktion för att lägga till lektion */ }}>Lägg till Lektion</button>
+                <button className="header-button-teacher" onClick={handleBackClick}>Tillbaka</button>
+                <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
             </header>
             <main className="course-details-main">
                 <h3>Deltagare</h3>
