@@ -6,7 +6,6 @@ import { auth, db } from "../../components/firebase/FirebaseConfig";
 import { useAuth } from "../../components/auth/AuthContext";
 import { signOut } from "firebase/auth";
 import './CourseDetailsPage.css';
-import { log } from "console";
 
 
 
@@ -82,11 +81,14 @@ const CourseDetailsPage: React.FC = () => {
         navigate(-1);
     }
 
+    const handleAddAssignmentsClick = () => {
+        navigate(`/course/${courseId}/add-assignment`)
+    }
     return (
         <div className="course-details-wrapper">
             <header className="course-details-header">
                 <h2>{courseTitle}</h2>
-                <button className="header-button-teacher" onClick={() => { /* Funktion för att lägga till uppgift */ }}>Lägg till Uppgift</button>
+                <button className="header-button-teacher" onClick={handleAddAssignmentsClick}>Lägg till Uppgift</button>
                 <button className="header-button-teacher" onClick={() => { /* Funktion för att lägga till lektion */ }}>Lägg till Lektion</button>
                 <button className="header-button-teacher" onClick={handleBackClick}>Tillbaka</button>
                 <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
