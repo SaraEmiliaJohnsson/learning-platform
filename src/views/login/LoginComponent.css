@@ -38,6 +38,15 @@
     border: 1px solid #31E981;
 }
 
+.register-button {
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: 600;
+    background-color: #00120B;
+    color: #31E981;
+    border: 1px solid #31E981;
+}
+
 input {
     padding: 5px;
     border-radius: 8px;

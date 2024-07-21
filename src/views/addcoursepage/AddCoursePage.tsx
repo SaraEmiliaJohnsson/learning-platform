@@ -39,12 +39,17 @@ const AddCoursePage: React.FC = () => {
         }
     }
 
+    const handleBackClick = () => {
+        navigate(-1);
+    }
+
 
 
     return (
         <div className="add-course-wrapper">
             <header className="teacher-header">
                 <h2>Lärarens sida</h2>
+                <button className="header-button-teacher" onClick={handleBackClick}>Tillbaka</button>
                 <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
             </header>
             <main className="add-course-main">
