@@ -40,3 +40,12 @@
     background-color: #00120B;
     color: #31E981;
 }
+
+.back-button {
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: 600;
+    border: 1px solid #31E981;
+    background-color: #00120B;
+    color: #31E981;
+}

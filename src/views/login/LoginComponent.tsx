@@ -31,6 +31,10 @@ const LoginComponent: React.FC = () => {
         }
     };
 
+    const handleRegisterClick = () => {
+        navigate('/register');
+    }
+
 
     return (
         <div className="login-container">
@@ -42,6 +46,7 @@ const LoginComponent: React.FC = () => {
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Lösenord" id="password" /><br />
                 <button className="login-button" type="submit">Logga in</button>
             </form>
+            <button className="register-button" onClick={handleRegisterClick}>Registrera dig här</button>
         </div>
     );
 };

@@ -35,7 +35,7 @@ const AddAssignmentsPage: React.FC = () => {
     };
 
     const handleBackClick = () => {
-        navigate('-1');
+        navigate(-1);
     }
 
     const handleSignOut = async () => {
