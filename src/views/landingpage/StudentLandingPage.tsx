@@ -70,7 +70,7 @@ const StudentLandingPage: React.FC = () => {
     };
 
     const handleCourseClick = (courseId: string) => {
-        navigate(`/course/${courseId}`);
+        navigate(`/student/course/${courseId}`);
     };
 
     const handleMessagesClick = () => {

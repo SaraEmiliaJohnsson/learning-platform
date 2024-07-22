@@ -23,6 +23,25 @@ export interface Assignments {
     students: string[];
 }
 
+export interface Lesson {
+    id: string;
+    title: string;
+    description: string;
+    date: string;
+}
+
+export interface ReadingTip {
+    id: string;
+    title: string;
+    description: string;
+}
+
+export interface LinkResource {
+    id: string;
+    title: string;
+    url: string;
+}
+
 export interface Message {
     id: string;
     senderId: string;
