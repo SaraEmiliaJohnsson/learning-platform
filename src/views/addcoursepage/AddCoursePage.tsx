@@ -39,9 +39,13 @@ const AddCoursePage: React.FC = () => {
         }
     }
 
+    const handleToStartPage = () => {
+        navigate('/teacher');
+    };
+
     const handleBackClick = () => {
         navigate(-1);
-    }
+    };
 
 
 
@@ -50,6 +54,7 @@ const AddCoursePage: React.FC = () => {
             <header className="teacher-header">
                 <h2>Lärarens sida</h2>
                 <button className="header-button-teacher" onClick={handleBackClick}>Tillbaka</button>
+                <button className="start-page-button" onClick={handleToStartPage}>Startsida</button>
                 <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
             </header>
             <main className="add-course-main">

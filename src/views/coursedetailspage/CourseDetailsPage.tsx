@@ -6,6 +6,8 @@ import { auth, db } from "../../components/firebase/FirebaseConfig";
 import { useAuth } from "../../components/auth/AuthContext";
 import { signOut } from "firebase/auth";
 import './CourseDetailsPage.css';
+import { IconButton, Menu, MenuItem } from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 
@@ -15,6 +17,7 @@ const CourseDetailsPage: React.FC = () => {
     const [students, setStudents] = useState<Student[]>([]);
     const [assignments, setAssignments] = useState<Assignments[]>([]);
     const [courseTitle, setCourseTitle] = useState<String>('');
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -81,15 +84,47 @@ const CourseDetailsPage: React.FC = () => {
         navigate(-1);
     }
 
+    const handleMenuClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(e.currentTarget);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+    };
+
     const handleAddAssignmentsClick = () => {
         navigate(`/course/${courseId}/add-assignment`)
-    }
+    };
+
+    const handleAddLessonClick = () => {
+        navigate(`/course/${courseId}/add-lesson`);
+        handleMenuClose();
+    };
+
+    const handleAddReadingTipClick = () => {
+        navigate(`/course/${courseId}/add-reading-tip`);
+        handleMenuClose();
+    };
+
+    const handleAddLinkClick = () => {
+        navigate(`/course/${courseId}/add-link`);
+        handleMenuClose();
+    };
+
     return (
         <div className="course-details-wrapper">
             <header className="course-details-header">
                 <h2>{courseTitle}</h2>
-                <button className="header-button-teacher" onClick={handleAddAssignmentsClick}>Lägg till Uppgift</button>
-                <button className="header-button-teacher" onClick={() => { /* Funktion för att lägga till lektion */ }}>Lägg till Lektion</button>
+                <IconButton onClick={handleMenuClick}>
+                    <MenuIcon />
+                </IconButton>
+                <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+                    <MenuItem onClick={handleAddAssignmentsClick}>Lägg till Uppgift</MenuItem>
+                    <MenuItem onClick={handleAddLessonClick}>Lägg till Lektion</MenuItem>
+                    <MenuItem onClick={handleAddReadingTipClick}>Lägg till Boktips</MenuItem>
+                    <MenuItem onClick={handleAddLinkClick}>Lägg till Länktips</MenuItem>
+                </Menu>
+
                 <button className="header-button-teacher" onClick={handleBackClick}>Tillbaka</button>
                 <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
             </header>

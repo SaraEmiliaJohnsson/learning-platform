@@ -52,6 +52,10 @@ const ViewStudentsRegistered: React.FC = () => {
         }
     };
 
+    const handleToStartPage = () => {
+        navigate('/teacher');
+    };
+
     const handleBackClick = () => {
         navigate(-1);
     };
@@ -61,6 +65,7 @@ const ViewStudentsRegistered: React.FC = () => {
             <header className="view-students-header">
                 <h2>Registrerade Elever</h2>
                 <button className="header-button-teacher" onClick={handleBackClick}>Tillbaka</button>
+                <button className="start-page-button" onClick={handleToStartPage}>Startsida</button>
                 <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
             </header>
             <main className="view-students-main">
