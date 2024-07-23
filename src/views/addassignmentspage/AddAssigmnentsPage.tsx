@@ -38,6 +38,10 @@ const AddAssignmentsPage: React.FC = () => {
         navigate(-1);
     }
 
+    const handleToStartPage = () => {
+        navigate('/teacher');
+    }
+
     const handleSignOut = async () => {
         try {
             await signOut(auth);
@@ -56,6 +60,7 @@ const AddAssignmentsPage: React.FC = () => {
             <header className="add-assignments-header">
                 <h2>Lägg till uppgift</h2>
                 <button className="header-button-teacher" onClick={handleBackClick}>Tillbaka</button>
+                <button className="start-page-button" onClick={handleToStartPage}>Startsida</button>
                 <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
             </header>
             <main className="add-assignments-main">
