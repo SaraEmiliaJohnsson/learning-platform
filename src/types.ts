@@ -44,9 +44,11 @@ export interface LinkResource {
 
 export interface Message {
     id: string;
-    senderId: string;
-    recipientId: string;
-    content: string;
+    title: string;
+    body: string;
+    sender: string;
+    recipients: string[];
+    read: boolean;
     timestamp: Date;
 }
 
