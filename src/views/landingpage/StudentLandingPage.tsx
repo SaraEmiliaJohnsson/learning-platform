@@ -12,6 +12,7 @@ const StudentLandingPage: React.FC = () => {
     const [courses, setCourses] = useState<Course[]>([]);
     const [completedCourses, setCompletedCourses] = useState<Course[]>([]);
     const [messages, setMessages] = useState<Message[]>([]);
+    const [unreadMessagesCount, setUnreadMessegesCount] = useState(0);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -46,8 +47,13 @@ const StudentLandingPage: React.FC = () => {
                 const q = query(collection(db, 'messages'), where('recipientId', '==', currentUser.uid));
                 const querySnapshot = await getDocs(q);
                 const msgs: Message[] = [];
+                let unreadCount = 0;
                 querySnapshot.forEach((doc) => {
-                    msgs.push({ id: doc.id, ...doc.data() } as Message);
+                    const message = { id: doc.id, ...doc.data() } as Message;
+                    msgs.push(message);
+                    if (!message.read) {
+                        unreadCount++;
+                    }
                 });
                 setMessages(msgs);
             } catch (error) {
@@ -74,7 +80,7 @@ const StudentLandingPage: React.FC = () => {
     };
 
     const handleMessagesClick = () => {
-        navigate('/messages');
+        navigate('/student-message');
     };
 
     const handleCompletedCoursesClick = () => {
@@ -87,7 +93,7 @@ const StudentLandingPage: React.FC = () => {
             <header className="landingpage-header">
                 <h2>Studerande sidan</h2>
                 <button className="header-button-student" onClick={handleCompletedCoursesClick}>Avslutade Kurser</button>
-                <button className="header-button-student" onClick={handleMessagesClick}>Meddelanden</button>
+                <button className="header-button-student" onClick={handleMessagesClick}>Meddelanden {unreadMessagesCount > 0 && `(${unreadMessagesCount})`}</button>
                 <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
             </header>
             <main className="landingpage-main">

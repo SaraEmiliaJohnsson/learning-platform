@@ -54,6 +54,7 @@ const StudentCourseDetailsPage: React.FC = () => {
     const handleSignOut = async () => {
         try {
             await signOut(auth);
+            navigate('/');
         } catch (error) {
             console.error('Failed signing out', error);
         }
