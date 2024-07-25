@@ -5,10 +5,9 @@ import { collection, doc, getDocs, query, updateDoc, where } from "firebase/fire
 import { auth, db } from "../../components/firebase/FirebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
+import './StudentMessegesPage.css';
 
-
-
-const StudentMessagePage: React.FC = () => {
+const StudentMessagesPage: React.FC = () => {
     const { currentUser } = useAuth();
     const [messages, setMessages] = useState<Message[]>([]);
     const navigate = useNavigate();
@@ -18,7 +17,7 @@ const StudentMessagePage: React.FC = () => {
             if (!currentUser) return;
 
             try {
-                const q = query(collection(db, 'messages'), where('recipient', '==', currentUser.uid));
+                const q = query(collection(db, 'messages'), where('recipients', 'array-contains', currentUser.uid));
                 const querySnapshot = await getDocs(q);
                 const msgs: Message[] = [];
                 querySnapshot.forEach((doc) => {
@@ -52,7 +51,6 @@ const StudentMessagePage: React.FC = () => {
         };
     };
 
-
     return (
         <div className="student-messages-wrapper">
             <header className="student-messages-header">
@@ -60,13 +58,12 @@ const StudentMessagePage: React.FC = () => {
                 <button className="back-button" onClick={handleBackClick}>Tillbaka</button>
                 <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
             </header>
-            <main className="student-message-main">
+            <main className="student-messages-main">
                 <ul className="student-messages-list">
                     {messages.map((message) => (
                         <li key={message.id}>
                             <h4>{message.title}</h4>
                             <p>{message.body}</p>
-                            <p>{message.sender}</p>
                         </li>
                     ))}
                 </ul>
@@ -75,4 +72,4 @@ const StudentMessagePage: React.FC = () => {
     );
 }
 
-export default StudentMessagePage;
+export default StudentMessagesPage;
