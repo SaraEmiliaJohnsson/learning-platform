@@ -40,29 +40,20 @@ const StudentLandingPage: React.FC = () => {
             }
         };
 
-        const fetchMessages = async () => {
+        const fetchUnreadMessagesCount = async () => {
             if (!currentUser) return;
 
             try {
-                const q = query(collection(db, 'messages'), where('recipientId', '==', currentUser.uid));
+                const q = query(collection(db, 'messages'), where('recipients', 'array-contains', currentUser.uid), where('read', '==', false));
                 const querySnapshot = await getDocs(q);
-                const msgs: Message[] = [];
-                let unreadCount = 0;
-                querySnapshot.forEach((doc) => {
-                    const message = { id: doc.id, ...doc.data() } as Message;
-                    msgs.push(message);
-                    if (!message.read) {
-                        unreadCount++;
-                    }
-                });
-                setMessages(msgs);
+                setUnreadMessegesCount(querySnapshot.size);
             } catch (error) {
                 console.error("Error fetching messages:", error);
             }
         };
 
         fetchCourses();
-        // fetchMessages();
+        fetchUnreadMessagesCount();
     }, [currentUser]);
 
     const handleSignOut = async () => {

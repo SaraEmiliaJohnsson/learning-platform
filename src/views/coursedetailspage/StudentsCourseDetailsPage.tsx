@@ -6,8 +6,6 @@ import { auth, db } from "../../components/firebase/FirebaseConfig";
 import { signOut } from "firebase/auth";
 import './StudentCourseDetailsPage.css';
 
-
-
 const StudentCourseDetailsPage: React.FC = () => {
     const { courseId } = useParams<{ courseId: string }>();
     const [assignments, setAssignments] = useState<Assignments[]>([]);
