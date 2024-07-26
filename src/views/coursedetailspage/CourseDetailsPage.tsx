@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
-import { Assignments, Student } from "../../types";
+import { Assignments, LinkResource, ReadingTip, Student } from "../../types";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { auth, db } from "../../components/firebase/FirebaseConfig";
 import { useAuth } from "../../components/auth/AuthContext";
@@ -16,6 +16,8 @@ const CourseDetailsPage: React.FC = () => {
     const { currentUser } = useAuth();
     const [students, setStudents] = useState<Student[]>([]);
     const [assignments, setAssignments] = useState<Assignments[]>([]);
+    const [readingTips, setReadingTips] = useState<ReadingTip[]>([]);
+    const [links, setLinks] = useState<LinkResource[]>([]);
     const [courseTitle, setCourseTitle] = useState<String>('');
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const navigate = useNavigate();
@@ -46,16 +48,27 @@ const CourseDetailsPage: React.FC = () => {
                         }
 
                         const assignmentsData: Assignments[] = [];
-                        const studentSnapshot = await getDocs(collection(db, `courses/${courseId}/students`));
-                        studentSnapshot.forEach((doc) => {
-                            studentData.push({ id: doc.id, ...doc.data() } as Student);
-                        });
                         const assignmentsSnapshot = await getDocs(collection(db, `courses/${courseId}/assignments`));
                         assignmentsSnapshot.forEach((doc) => {
                             assignmentsData.push({ id: doc.id, ...doc.data() } as Assignments);
                         });
+
+                        const readingTipsData: ReadingTip[] = [];
+                        const readingTipsSnapshot = await getDocs(collection(db, `courses/${courseId}/readingTips`));
+                        readingTipsSnapshot.forEach((doc) => {
+                            readingTipsData.push({ id: doc.id, ...doc.data() } as ReadingTip);
+                        });
+
+                        const linksData: LinkResource[] = [];
+                        const linksSnapshot = await getDocs(collection(db, `courses/${courseId}/links`));
+                        linksSnapshot.forEach((doc) => {
+                            linksData.push({ id: doc.id, ...doc.data() } as LinkResource);
+                        });
+
                         setStudents(studentData);
                         setAssignments(assignmentsData);
+                        setReadingTips(readingTipsData);
+                        setLinks(linksData);
                     } else {
                         console.error("Course does not exist");
                     }
@@ -139,6 +152,18 @@ const CourseDetailsPage: React.FC = () => {
                 <ul className="assignments-list">
                     {assignments.map((assignment) => (
                         <li key={assignment.id}>{assignment.title}</li>
+                    ))}
+                </ul>
+                <h3>Boktips</h3>
+                <ul className="reading-tips-list">
+                    {readingTips.map((tip) => (
+                        <li key={tip.id}>{tip.title}</li>
+                    ))}
+                </ul>
+                <h3>Länktips</h3>
+                <ul className="links-list">
+                    {links.map((link) => (
+                        <li key={link.id}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.title}</a></li>
                     ))}
                 </ul>
             </main>
