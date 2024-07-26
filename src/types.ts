@@ -33,6 +33,7 @@ export interface Lesson {
 export interface ReadingTip {
     id: string;
     title: string;
+    author: string;
     description: string;
 }
 
