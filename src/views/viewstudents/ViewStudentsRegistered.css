@@ -1,8 +1,9 @@
-
 .view-students-wrapper {
     width: 100vw;
     height: 100vh;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #e0e7ff; /* Slightly darker light blue background */
 }
 
 .view-students-header {
@@ -12,41 +13,28 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #d8e4ff;
-    border-bottom: 1px solid #35605a;
+    background-color: #b0c4de; /* Slightly darker blue */
+    border-bottom: 1px solid #00120B; /* Dark blue border */
 }
 
 .view-students-header h2 {
     margin: 0;
+    color: #00120B; /* Primary dark color */
 }
 
-.logout-button {
-    background-color: #00120B;
-    color: #31E981;
+.logout-button, .header-button-teacher {
+    background-color: #00120B; /* Primary dark color */
+    color: #b0c4de; /* Slightly darker blue */
     padding: 10px;
     border-radius: 6px;
-    border: 1.5px solid #31E981;
+    border: 1.5px solid #b0c4de;
     margin-right: 1rem;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.header-button-teacher {
-    background-color: #00120B;
-    color: #31E981;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1.5px solid #31E981;
-    margin-right: 1rem;
-}
-
-.header-button-teacher:hover {
-    background-color: #31E981;
-    color: #00120B;
-    border: 1.5px solid #00120B;
-}
-
-.logout-button:hover {
-    background-color: #31E981;
-    color: #00120B;
+.header-button-teacher:hover, .logout-button:hover {
+    background-color: #b0c4de; /* Slightly darker blue */
+    color: #00120B; /* Primary dark color */
     border: 1.5px solid #00120B;
 }
 
@@ -56,8 +44,33 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 1rem;
+    padding: 2rem;
     overflow-y: auto;
+    background-color: #ffffff; /* White background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
     margin-left: 2rem;
-    padding-top: 10rem;
+}
+
+.view-students-main h3 {
+    margin: 10px;
+}
+
+.students-list {
+    list-style: none;
+    padding: 5px;
+}
+
+.students-list li {
+    padding: 1rem;
+    border: 1px solid #dee2e6; /* Light grey border */
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+    margin-bottom: 1rem;
+}
+
+.students-list li:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
 }
