@@ -12,25 +12,26 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #d8e4ff;
-    border-bottom: 1px solid #35605a;
+    background-color: #3a86ff; /* Updated to primary blue */
+    border-bottom: 1px solid #007bff; /* Darker shade for border */
 }
 
 .add-reading-tip-header h2 {
     margin: 0;
+    color: #f8f9fa; /* Light grey for text */
 }
 
-.logout-button, .back-button {
-    background-color: #00120B;
-    color: #31E981;
+.logout-button, .header-button-teacher {
+    background-color: #007bff; /* Primary blue */
+    color: #f8f9fa; /* Light grey for text */
     padding: 10px;
     border-radius: 6px;
-    border: 1.5px solid #31E981;
+    border: 1.5px solid #007bff; /* Primary blue */
     margin-right: 1rem;
 }
 
-.back-button:hover, .logout-button:hover {
-    background-color: #31E981;
+.header-button-teacher:hover, .logout-button:hover {
+    background-color: #ffba08; /* Accent orange */
     color: #00120B;
     border: 1.5px solid #00120B;
 }
@@ -82,8 +83,8 @@
 .form-container button {
     width: 100%;
     padding: 0.75rem;
-    background-color: #00120B;
-    color: #31E981;
+    background-color: #007bff; /* Primary blue */
+    color: #f8f9fa; /* Light grey for text */
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -91,6 +92,6 @@
 }
 
 .form-container button:hover {
-    background-color: #31E981;
+    background-color: #ffba08; /* Accent orange */
     color: #00120B;
 }

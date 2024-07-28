@@ -1,8 +1,8 @@
-
 .course-details-wrapper {
     width: 100vw;
     height: 100vh;
-    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .course-details-header {
@@ -12,40 +12,26 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #d8e4ff;
-    border-bottom: 1px solid #35605a;
+    background-color: #3a86ff; /* Primary blue */
+    border-bottom: 1px solid #007bff; /* Darker shade for border */
 }
 
 .course-details-header h2 {
     margin: 0;
+    color: #f8f9fa; /* Light grey for text */
 }
 
-.logout-button {
-    background-color: #00120B;
-    color: #31E981;
+.logout-button, .header-button-teacher {
+    background-color: #007bff; /* Primary blue */
+    color: #f8f9fa; /* Light grey for text */
     padding: 10px;
     border-radius: 6px;
-    border: 1.5px solid #31E981;
+    border: 1.5px solid #007bff; /* Primary blue */
     margin-right: 1rem;
 }
 
-.header-button-teacher {
-    background-color: #00120B;
-    color: #31E981;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1.5px solid #31E981;
-    margin-right: 1rem;
-}
-
-.header-button-teacher:hover {
-    background-color: #31E981;
-    color: #00120B;
-    border: 1.5px solid #00120B;
-}
-
-.logout-button:hover {
-    background-color: #31E981;
+.header-button-teacher:hover, .logout-button:hover {
+    background-color: #ffba08; /* Accent orange */
     color: #00120B;
     border: 1.5px solid #00120B;
 }
@@ -56,10 +42,8 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 1rem;
+    padding: 2rem; /* Changed to 2rem for consistency */
     overflow-y: auto;
-    margin-left: 2rem;
-    padding-top: 10rem;
 }
 
 .courses-list {
