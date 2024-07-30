@@ -71,7 +71,7 @@ const RegisterComponent: React.FC = () => {
                     <option value="teacher">Lärare</option>
                 </select>
                 <button className="register-button" type="submit">Registrera</button>
-                <button className="back-button" onClick={handleBackClick}>Tillbaka</button>
+                <button className="back-button-register" onClick={handleBackClick}>Tillbaka</button>
             </form>
         </section>
     );

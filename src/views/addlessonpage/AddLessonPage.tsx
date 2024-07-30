@@ -92,6 +92,11 @@ const AddLessonPage: React.FC = () => {
                     <button className="submit-button" type="submit">Lägg till Lektion</button>
                 </form>
             </main>
+            <footer className="footer">
+                <p>&copy; 2023 Your Learning Platform. All rights reserved.</p>
+                <a href="/privacy-policy">Privacy Policy</a>
+                <a href="/terms-of-service">Terms of Service</a>
+            </footer>
         </div>
     )
 }

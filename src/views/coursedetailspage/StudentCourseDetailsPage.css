@@ -12,28 +12,13 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #3a86ff; /* Updated to primary blue */
-    border-bottom: 1px solid #007bff; /* Darker shade for border */
+    background-color: #e0edfa; /* Updated to primary blue */
+    border-bottom: 1px solid #00120B;
 }
 
 .student-course-details-header h2 {
     margin: 0;
-    color: #f8f9fa; /* Light grey for text */
-}
-
-.back-button, .logout-button {
-    background-color: #007bff; /* Primary blue */
-    color: #f8f9fa; /* Light grey for text */
-    padding: 10px;
-    border-radius: 6px;
-    border: 1.5px solid #007bff; /* Primary blue */
-    margin-right: 1rem;
-}
-
-.back-button:hover, .logout-button:hover {
-    background-color: #ffba08; /* Accent orange */
     color: #00120B;
-    border: 1.5px solid #00120B;
 }
 
 .student-course-details-main {
