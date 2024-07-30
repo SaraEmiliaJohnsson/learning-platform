@@ -63,6 +63,11 @@ const AddCoursePage: React.FC = () => {
                 <textarea placeholder="Beskrivning" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
                 <button className="add-course-button" onClick={handleAddCourse}>Lägg till Kurs</button>
             </main>
+            <footer className="footer">
+                <p>&copy; 2023 Your Learning Platform. All rights reserved.</p>
+                <a href="/privacy-policy">Privacy Policy</a>
+                <a href="/terms-of-service">Terms of Service</a>
+            </footer>
         </div>
     );
 };

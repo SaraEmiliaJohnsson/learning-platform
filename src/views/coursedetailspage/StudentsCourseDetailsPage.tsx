@@ -63,7 +63,7 @@ const StudentCourseDetailsPage: React.FC = () => {
     }
 
     return (
-        <div className="student-course-details-wapper">
+        <div className="student-course-details-wrapper">
             <header className="student-course-details-header">
                 <h2>{courseTitle}</h2>
                 <button className="back-button" onClick={handleBackClick}>Tillbaka</button>
@@ -95,7 +95,11 @@ const StudentCourseDetailsPage: React.FC = () => {
                     ))}
                 </ul>
             </main>
-
+            <footer className="footer">
+                <p>&copy; 2023 Your Learning Platform. All rights reserved.</p>
+                <a href="/privacy-policy">Privacy Policy</a>
+                <a href="/terms-of-service">Terms of Service</a>
+            </footer>
         </div>
     );
 }

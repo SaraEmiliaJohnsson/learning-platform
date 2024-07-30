@@ -12,27 +12,28 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #3a86ff; /* Primary blue */
-    border-bottom: 1px solid #007bff; /* Darker shade for border */
+    background-color: #e0edfa; /* Primary blue */
+    border-bottom: 1px solid #00120B;
 }
 
 .course-details-header h2 {
     margin: 0;
-    color: #f8f9fa; /* Light grey for text */
+    color: #00120B;
 }
 
-.logout-button, .header-button-teacher {
-    background-color: #007bff; /* Primary blue */
-    color: #f8f9fa; /* Light grey for text */
+.header-button-teacher {
+    background-color: #00120B; /* Primary dark color */
+    color: #e0edfa; /* Slightly darker blue */
     padding: 10px;
     border-radius: 6px;
-    border: 1.5px solid #007bff; /* Primary blue */
+    border: 1.5px solid #b0c4de;
     margin-right: 1rem;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.header-button-teacher:hover, .logout-button:hover {
-    background-color: #ffba08; /* Accent orange */
-    color: #00120B;
+.header-button-teacher:hover {
+    background-color: #b0c4de; /* Slightly darker blue */
+    color: #00120B; /* Primary dark color */
     border: 1.5px solid #00120B;
 }
 

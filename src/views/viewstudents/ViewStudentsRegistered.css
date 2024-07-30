@@ -13,7 +13,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #b0c4de; /* Slightly darker blue */
+    background-color: #e0edfa; /* Slightly darker blue */
     border-bottom: 1px solid #00120B; /* Dark blue border */
 }
 
@@ -22,9 +22,9 @@
     color: #00120B; /* Primary dark color */
 }
 
-.logout-button, .header-button-teacher {
+.header-button-teacher {
     background-color: #00120B; /* Primary dark color */
-    color: #b0c4de; /* Slightly darker blue */
+    color: #e0edfa; /* Slightly darker blue */
     padding: 10px;
     border-radius: 6px;
     border: 1.5px solid #b0c4de;
@@ -32,7 +32,7 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-.header-button-teacher:hover, .logout-button:hover {
+.header-button-teacher:hover {
     background-color: #b0c4de; /* Slightly darker blue */
     color: #00120B; /* Primary dark color */
     border: 1.5px solid #00120B;

@@ -15,7 +15,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #b0c4de; /* Slightly darker blue */
+    background-color: #e0edfa; /* Slightly darker blue */
     border-bottom: 1px solid #00120B; /* Dark blue border */
 }
 
@@ -24,22 +24,6 @@
     color: #00120B; /* Primary dark color */
 }
 
-/* Button Styling */
-.logout-button, .back-button {
-    background-color: #00120B; /* Primary dark color */
-    color: #b0c4de; /* Slightly darker blue */
-    padding: 10px;
-    border-radius: 6px;
-    border: 1.5px solid #b0c4de;
-    margin-right: 1rem;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.back-button:hover, .logout-button:hover {
-    background-color: #b0c4de; /* Slightly darker blue */
-    color: #00120B; /* Primary dark color */
-    border: 1.5px solid #00120B;
-}
 
 /* Main Content Styling */
 .student-messages-main {
