@@ -36,7 +36,7 @@
     border: 1px solid #00120B;
 }
 
-.register-button {
+.register-button, .login-button {
     padding: 5px;
     border-radius: 5px;
     font-weight: 600;
@@ -46,7 +46,7 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-.register-button:hover {
+.register-button:hover, .login-button:hover {
     background-color: #d8e4ff; /* Light blue */
     color: #00120B; /* Primary dark color */
     border: 1.5px solid #00120B;
