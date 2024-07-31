@@ -23,7 +23,7 @@
 
 .header-button-student {
     background-color: #00120B; /* Primary dark color */
-    color: #e0edfa; /* Slightly darker blue */
+    color: #e0edfa; 
     padding: 10px;
     border-radius: 6px;
     border: 1.5px solid #b0c4de;
@@ -32,7 +32,7 @@
 }
 
 .header-button-student:hover {
-    background-color: #b0c4de; /* Slightly darker blue */
+    background-color: #b0c4de; 
     color: #00120B; /* Primary dark color */
     border: 1.5px solid #00120B;
 }
@@ -43,7 +43,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 2rem; /* Changed to 2rem for consistency */
+    padding: 2rem; 
     overflow-y: auto;
     margin-left: 2rem;
     padding-top: 10rem;
@@ -53,7 +53,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1rem;
-    width: 100%; /* Ensuring the grid takes full width */
+    width: 50%; 
 }
 
 .course-card {
