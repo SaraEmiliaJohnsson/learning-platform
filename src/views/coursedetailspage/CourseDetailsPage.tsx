@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import { Assignments, LinkResource, ReadingTip, Student } from "../../types";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../components/firebase/FirebaseConfig";
 import { useAuth } from "../../components/auth/AuthContext";
 import { signOut } from "firebase/auth";
@@ -124,6 +124,22 @@ const CourseDetailsPage: React.FC = () => {
         handleMenuClose();
     };
 
+    const markCourseAsCompleted = async (courseId: string) => {
+        if (!courseId) {
+            console.error('Course ID is undefined');
+            return;
+        }
+
+        const courseRef = doc(db, 'courses', courseId);
+        try {
+            await updateDoc(courseRef, { completed: true });
+            console.log('Course marked as completed');
+
+        } catch (error) {
+            console.error('Error updating course:', error);
+        }
+    };
+
     return (
         <div className="course-details-wrapper">
             <header className="course-details-header">
@@ -166,6 +182,7 @@ const CourseDetailsPage: React.FC = () => {
                         <li key={link.id}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.title}</a></li>
                     ))}
                 </ul>
+                <button onClick={() => markCourseAsCompleted(courseId!)}>Lägg kursen som avslutad</button>
             </main>
             <footer className="footer">
                 <p>&copy; 2023 Your Learning Platform. All rights reserved.</p>
