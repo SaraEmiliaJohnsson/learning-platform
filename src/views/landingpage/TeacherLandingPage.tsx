@@ -9,18 +9,30 @@ import { collection, doc, getDocs } from "firebase/firestore";
 
 
 const TeacherLandingPage = () => {
-    const [courses, setCourses] = useState<Course[]>([]);
+    const [ongoingCourses, setOngoingCourses] = useState<Course[]>([]);
+    const [completedCourses, setCompletedCourses] = useState<Course[]>([]);
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCourses = async () => {
             try {
                 const querySnapshot = await getDocs(collection(db, 'courses'));
-                const courseData: Course[] = [];
+                const ongoing: Course[] = [];
+                const completed: Course[] = [];
+
                 querySnapshot.forEach((doc) => {
-                    courseData.push({ id: doc.id, ...doc.data() } as Course);
+                    const courseData = doc.data() as Omit<Course, 'id'>;
+                    const course = { id: doc.id, ...courseData };
+
+                    if (course.completed) {
+                        completed.push(course);
+                    } else {
+                        ongoing.push(course);
+                    }
                 });
-                setCourses(courseData);
+                setOngoingCourses(ongoing);
+                setCompletedCourses(completed);
+
             } catch (error) {
                 console.error('Error fetching courses:', error);
             }
@@ -60,7 +72,15 @@ const TeacherLandingPage = () => {
             <main className="landingpage-main">
                 <h3>Pågående Kurser</h3>
                 <ul className="courses-list">
-                    {courses.map((course) => (
+                    {ongoingCourses.map((course) => (
+                        <li key={course.id} onClick={() => handleCourseClick(course.id)}>
+                            {course.title}
+                        </li>
+                    ))}
+                </ul>
+                <h3>Avslutade Kurser</h3>
+                <ul className="courses-list">
+                    {completedCourses.map((course) => (
                         <li key={course.id} onClick={() => handleCourseClick(course.id)}>
                             {course.title}
                         </li>
