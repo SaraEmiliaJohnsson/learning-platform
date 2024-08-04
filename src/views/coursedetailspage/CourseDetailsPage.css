@@ -3,6 +3,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    line-height: 2rem;
 }
 
 .course-details-header {
@@ -21,7 +22,7 @@
     color: #00120B;
 }
 
-.header-button-teacher {
+.header-button-teacher, .course-completed-button {
     background-color: #00120B; /* Primary dark color */
     color: #e0edfa; /* Slightly darker blue */
     padding: 10px;
@@ -31,11 +32,16 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-.header-button-teacher:hover {
+.header-button-teacher:hover, .course-completed-button:hover {
     background-color: #b0c4de; /* Slightly darker blue */
     color: #00120B; /* Primary dark color */
     border: 1.5px solid #00120B;
 }
+
+.course-completed-button {
+    margin: 15px;
+}
+
 
 .landingpage-main {
     flex: 1;

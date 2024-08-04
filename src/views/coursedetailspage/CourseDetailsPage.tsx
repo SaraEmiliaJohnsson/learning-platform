@@ -19,6 +19,7 @@ const CourseDetailsPage: React.FC = () => {
     const [readingTips, setReadingTips] = useState<ReadingTip[]>([]);
     const [links, setLinks] = useState<LinkResource[]>([]);
     const [courseTitle, setCourseTitle] = useState<String>('');
+    const [isCompleted, setIsCompleted] = useState<boolean>(false);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const navigate = useNavigate();
 
@@ -35,9 +36,11 @@ const CourseDetailsPage: React.FC = () => {
                 if (userDoc.exists() && userDoc.data()?.role === 'teacher') {
                     const courseDoc = await getDoc(doc(db, 'courses', courseId));
                     if (courseDoc.exists()) {
-                        setCourseTitle(courseDoc.data()?.title || '');
+                        const courseData = courseDoc.data();
+                        setCourseTitle(courseData?.title || '');
+                        setIsCompleted(courseData?.completed || false);
 
-                        const studentIds = courseDoc.data()?.students || [];
+                        const studentIds = courseData?.students || [];
                         const studentData: Student[] = [];
 
                         for (const studentId of studentIds) {
@@ -124,17 +127,16 @@ const CourseDetailsPage: React.FC = () => {
         handleMenuClose();
     };
 
-    const markCourseAsCompleted = async (courseId: string) => {
+    const toggleCourseCompletion = async () => {
         if (!courseId) {
             console.error('Course ID is undefined');
             return;
         }
-
-        const courseRef = doc(db, 'courses', courseId);
         try {
-            await updateDoc(courseRef, { completed: true });
-            console.log('Course marked as completed');
-
+            await updateDoc(doc(db, 'courses', courseId), { completed: !isCompleted });
+            setIsCompleted(!isCompleted);
+            console.log('Course completion status updated');
+            navigate('/teacher')
         } catch (error) {
             console.error('Error updating course:', error);
         }
@@ -182,7 +184,9 @@ const CourseDetailsPage: React.FC = () => {
                         <li key={link.id}><a href={link.url} target="_blank" rel="noopener noreferrer">{link.title}</a></li>
                     ))}
                 </ul>
-                <button onClick={() => markCourseAsCompleted(courseId!)}>Lägg kursen som avslutad</button>
+                <button className="course-completed-button" onClick={toggleCourseCompletion}>
+                    {isCompleted ? 'Sätt kursen som pågående' : 'Markera som avslutad'}
+                </button>
             </main>
             <footer className="footer">
                 <p>&copy; 2023 Your Learning Platform. All rights reserved.</p>
