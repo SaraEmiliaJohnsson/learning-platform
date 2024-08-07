@@ -49,6 +49,10 @@ const StudentCourseDetailsPage: React.FC = () => {
         fetchCourseDetails();
     }, [courseId]);
 
+    const handleAssignmentsClick = (assignmentId: string) => {
+        navigate(`/course/${courseId}/assignment/${assignmentId}`);
+    };
+
     const handleSignOut = async () => {
         try {
             await signOut(auth);
@@ -73,7 +77,7 @@ const StudentCourseDetailsPage: React.FC = () => {
                 <h3>Uppgifter</h3>
                 <ul className="assignments-list">
                     {assignments.map((assignment) => (
-                        <li key={assignment.id}>{assignment.title}</li>
+                        <li key={assignment.id} onClick={() => handleAssignmentsClick(assignment.id)}>{assignment.title}</li>
                     ))}
                 </ul>
                 <h3>Kommande Lektioner</h3>

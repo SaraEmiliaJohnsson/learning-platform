@@ -17,6 +17,7 @@ import StudentMessagesPage from './views/studentmessagepage/StudentMessagesPage'
 import AddReadingTipPage from './views/addreadingtip/AddReadingTipPage';
 import AddLinkPage from './views/addlinkpage/AddLinkPage';
 import CompleatedCoursesPage from './views/completedcoursespage/CompletedCoursesPage';
+import AssignmentDetailsPage from './views/assignmentdetailspage/AssignmentDetailsPage';
 
 const App: React.FC = () => {
   return (
@@ -38,6 +39,8 @@ const App: React.FC = () => {
           <Route path="/course/:courseId/add-reading-tip" element={<AddReadingTipPage />} />
           <Route path="/course/:courseId/add-link" element={<AddLinkPage />} />
           <Route path="/completed-courses" element={<CompleatedCoursesPage />} />
+          <Route path="/course/:courseId/assignment/:assignmentId" element={<AssignmentDetailsPage />} />
+
         </Routes>
 
       </AuthProvider>
