@@ -1,0 +1,74 @@
+.assignment-submissions-wrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.assignment-submissions-header {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #e0edfa; /* Updated to primary blue */
+    border-bottom: 1px solid #007bff; /* Darker shade for border */
+}
+
+.assignment-submissions-header h2 {
+    margin: 0;
+    color: #00120B;
+}
+
+.assignment-submissions-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem;
+    overflow-y: auto;
+    line-height: 3rem;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 600px;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    margin-bottom: 1rem;
+    color: #00120B;
+}
+
+
+.form-container textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+
+.form-container button {
+    width: 100%;
+    background-color: #00120B; /* Primary dark color */
+    color: #e0edfa; /* Slightly darker blue */
+    padding: 10px;
+    border-radius: 6px;
+    border: 1.5px solid #b0c4de;
+    margin-right: 1rem;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.form-container button:hover {
+    background-color: #b0c4de; /* Slightly darker blue */
+    color: #00120B; /* Primary dark color */
+    border: 1.5px solid #00120B;
+}
