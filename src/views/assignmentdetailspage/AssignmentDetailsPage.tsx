@@ -14,10 +14,12 @@ const AssignmentDetailsPage: React.FC = () => {
     const [courseTitle, setCourseTitle] = useState<string>('');
     const [assignmentTitle, setAssignmentTitle] = useState<string>('');
     const [assignmentDescription, setAssignmentDescription] = useState<string>('');
-    const [response, setResponse] = useState<string>('');
+    const [file, setFile] = useState<File | null>(null);
+    const [githubLink, setGithubLink] = useState<string>('');
     const [feedback, setFeedback] = useState<string>('');
     const [grade, setGrade] = useState<string>('');
     const [graded, setGraded] = useState<boolean>(false);
+    const [submissionStatus, setSubmissionStatus] = useState<string>('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -45,7 +47,7 @@ const AssignmentDetailsPage: React.FC = () => {
                 const responseDoc = await getDoc(doc(db, `courses/${courseId}/assignments/${assignmentId}/responses`, currentUser?.uid || ''));
                 if (responseDoc.exists()) {
                     const responseData = responseDoc.data();
-                    setResponse(responseData.response || '');
+                    setGithubLink(responseData.response || '');
                     setGraded(responseData.graded || false);
                     setFeedback(responseData.feedback || '');
                     setGrade(responseData.grade || '');
@@ -55,7 +57,7 @@ const AssignmentDetailsPage: React.FC = () => {
             }
         };
         fetchDetails();
-    }, [courseId, assignmentId]);
+    }, [courseId, assignmentId, currentUser?.uid]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -65,15 +67,24 @@ const AssignmentDetailsPage: React.FC = () => {
             const responseRef = doc(collection(db, `courses/${courseId}/assignments/${assignmentId}/responses`));
             await setDoc(responseRef, {
                 studentId: currentUser?.uid,
-                response: response,
+                githubLink: githubLink,
                 submissionTimestamp: new Date(),
                 graded: false,
                 feedback: '',
                 grade: '',
             });
-            alert('Respoinse submitted successfully');
+            setSubmissionStatus('Your response has been submitted successfully.');
+            setTimeout(() => navigate(-1));
+
         } catch (error) {
             console.error('Error submitting response', error);
+            setSubmissionStatus('There was en error submitting your response.');
+        }
+    };
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            setFile(e.target.files[0]);
         }
     };
 
@@ -102,7 +113,14 @@ const AssignmentDetailsPage: React.FC = () => {
                 <p>{assignmentDescription}</p>
                 {!graded ? (
                     <form className="form-container" onSubmit={handleSubmit}>
-                        <textarea value={response} onChange={(e) => setResponse(e.target.value)} placeholder="Enter your response" required></textarea>
+                        <label>
+                            GitHub Länk:
+                            <input type="url" value={githubLink} onChange={(e) => setGithubLink(e.target.value)} placeholder="Skriv in din GitHub länk" />
+                        </label>
+                        <label>
+                            Ladda upp en fil:
+                            <input type="file" onChange={handleFileChange} />
+                        </label>
                         <button className="submit-button" type="submit">Skicka Svar</button>
                     </form>
                 ) : (

@@ -34,7 +34,7 @@ const AssignmentSubmissionsPage: React.FC = () => {
         fetchSubissions();
     }, [courseId, assignmentId]);
 
-    const handleGradeSubmission = async (submissionId: string, feedback: string, grade: string) => {
+    const handleGradeSubmission = async (submissionId: string, feedback: string, grade: 'IG' | 'G' | 'VG' | 'MVG') => {
         try {
             const submissionRef = doc(db, `courses/${courseId}/assignments/${assignmentId}/responses`, submissionId);
             await updateDoc(submissionRef, {
@@ -73,7 +73,13 @@ const AssignmentSubmissionsPage: React.FC = () => {
                                     handleGradeSubmission(submission.id, feedback, grade);
                                 }}>
                                     <textarea name="feedback" placeholder="Bedömning.."></textarea>
-                                    <input name="grade" placeholder="Betyg.." />
+                                    <select name="grade" required>
+                                        <option value="IG">IG</option>
+                                        <option value="G">G</option>
+                                        <option value="VG">VG</option>
+                                        <option value="MVG">MVG</option>
+                                    </select>
+                                    <button className="submit-button" type="submit">Rätta</button>
                                 </form>
                             ) : (
                                 <p>Rättad: {submission.grade} - {submission.feedback}</p>
