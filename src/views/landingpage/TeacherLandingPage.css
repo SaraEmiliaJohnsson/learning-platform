@@ -76,10 +76,18 @@
 }
 
 /* Example Media Query for Mobile Devices */
-@media (max-width: 768px) {
-    .landingpage-header, .landingpage-main {
+@media (max-width: 550px) {
+    .landingpage-header {
         flex-direction: column;
         align-items: center;
+        height: auto;
+    }
+    .landingpage-main {
+        align-items: center;
+        justify-content: center;
+    }
+    .header-button-teacher, .logout-button {
+        width: 100%;
     }
     .courses-list li {
         width: 100%;

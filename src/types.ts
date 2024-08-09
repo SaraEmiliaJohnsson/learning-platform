@@ -12,7 +12,7 @@ export interface Course {
     description: string;
     completed: boolean;
     students: string[];
-    assignments: string[];
+    assignments: Assignments[];
 }
 
 export interface Assignments {
@@ -21,6 +21,16 @@ export interface Assignments {
     description: string;
     completed: boolean;
     students: string[];
+    responses: AssignmentResponse[];
+}
+
+export interface AssignmentResponse {
+    studentId: string;
+    response: string;
+    submissionTimestamp: Date;
+    graded: boolean;
+    feedback?: string;
+    grade?: 'IG' | 'G' | 'VG' | 'MVG';
 }
 
 export interface Lesson {
@@ -59,6 +69,6 @@ export interface Grade {
     description: string;
     dueDate: Date;
     courseId: string;
-    grade: number;
-    grades: { [key: string]: number };
+    grade: string;
+    grades: { [studentId: string]: string };
 }
