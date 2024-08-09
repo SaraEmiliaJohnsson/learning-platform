@@ -4,13 +4,14 @@ import { auth, db } from "../../components/firebase/FirebaseConfig";
 import './TeacherLandingPage.css';
 import { useEffect, useState } from "react";
 import { Course } from "../../types";
-import { collection, doc, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs, query, where } from "firebase/firestore";
 
 
 
 const TeacherLandingPage = () => {
     const [ongoingCourses, setOngoingCourses] = useState<Course[]>([]);
     const [completedCourses, setCompletedCourses] = useState<Course[]>([]);
+    const [ungradedSubmissionsCount, setUngradedSubmissionsCount] = useState<number>(0);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -37,8 +38,26 @@ const TeacherLandingPage = () => {
                 console.error('Error fetching courses:', error);
             }
         };
+
+        const fetchUngradedSubmissionsCount = async () => {
+            try {
+                let count = 0;
+                for (const course of ongoingCourses) {
+                    for (const assignmentId of course.assignments) {
+                        const submissionRef = collection(db, `courses/${course.id}/assignments/${assignmentId}/responses`);
+                        const ungradedSubmissionSnapshot = await getDocs(query(submissionRef, where('graded', '==', false)));
+                        count += ungradedSubmissionSnapshot.size;
+                    }
+                }
+                setUngradedSubmissionsCount(count);
+            } catch (error) {
+                console.error('Error fetching submissions:', error);
+            }
+        }
+
         fetchCourses();
-    }, []);
+        fetchUngradedSubmissionsCount();
+    }, [ongoingCourses]);
 
     const handleCourseClick = (courseId: string) => {
         navigate(`/course/${courseId}`);
@@ -46,6 +65,16 @@ const TeacherLandingPage = () => {
 
     const handleSendMessage = () => {
         navigate('/add-message');
+    };
+
+    const handleGradeSubmissions = () => {
+        for (const course of ongoingCourses) {
+            for (const assignmentId of course.assignments) {
+                // You should navigate to the specific assignment submissions page
+                navigate(`/course/${course.id}/assignment/${assignmentId}/submissions`);
+                return; // Navigate to the first found assignment with ungraded submissions
+            }
+        }
     };
 
     const handleSignOut = async () => {
@@ -66,7 +95,8 @@ const TeacherLandingPage = () => {
                 <h2>Lärarens sida</h2>
                 <button className="header-button-teacher" onClick={() => navigate('/add-course')}>Lägg till Kurs</button>
                 <button className="header-button-teacher" onClick={() => navigate('/see-students')}>Registrerade Studenter</button>
-                <button className="header-button-teacher" onClick={handleSendMessage}>Sckicka Meddelande</button>
+                <button className="header-button-teacher" onClick={handleSendMessage}>Skicka Meddelande</button>
+                <button className="header-button-teacher" onClick={handleGradeSubmissions}>Rätta Uppgifter {ungradedSubmissionsCount > 0 && `(${ungradedSubmissionsCount})`}</button>
                 <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
             </header>
             <main className="landingpage-main">

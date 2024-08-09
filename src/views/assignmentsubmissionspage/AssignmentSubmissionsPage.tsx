@@ -1,8 +1,9 @@
 import { collection, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
-import { db } from "../../components/firebase/FirebaseConfig";
+import { Navigate, useNavigate, useParams } from "react-router-dom"
+import { auth, db } from "../../components/firebase/FirebaseConfig";
 import './AssignmentSubmissionsPage.css';
+import { signOut } from "firebase/auth";
 
 
 
@@ -11,6 +12,7 @@ const AssignmentSubmissionsPage: React.FC = () => {
     const { courseId, assignmentId } = useParams<{ courseId: string, assignmentId: string }>();
     const [courseTitle, setCourseTitle] = useState<string>();
     const [submissions, setSubmissions] = useState<any[]>([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchSubissions = async () => {
@@ -50,14 +52,26 @@ const AssignmentSubmissionsPage: React.FC = () => {
         }
     };
 
+    const handleBackClick = () => {
+        navigate(-1);
+    };
+
+    const handleSignOut = async () => {
+        try {
+            await signOut(auth);
+            navigate('/');
+        } catch (error) {
+            console.error('Failed signing out', error);
+        };
+    };
 
 
     return (
         <div className="assignment-submissions-wrapper">
             <header className="assignment-submissions-header">
                 <h2>{courseTitle}</h2>
-                <button className="back-button">Tillbaka</button>
-                <button className="logout-button">Logga ut</button>
+                <button className="back-button" onClick={handleBackClick}>Tillbaka</button>
+                <button className="logout-button" onClick={handleSignOut}>Logga ut</button>
             </header>
             <main className="assignment-submissions-main">
                 <h2>Resultat på Uppgift</h2>
