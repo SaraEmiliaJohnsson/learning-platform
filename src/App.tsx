@@ -42,7 +42,6 @@ const App: React.FC = () => {
           <Route path="/completed-courses" element={<CompleatedCoursesPage />} />
           <Route path="/course/:courseId/assignment/:assignmentId" element={<AssignmentDetailsPage />} />
           <Route path="/course/:courseId/assignment/:assignmentId/submissions" element={<AssignmentSubmissionsPage />} />
-
         </Routes>
 
       </AuthProvider>
