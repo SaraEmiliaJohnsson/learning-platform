@@ -1,6 +1,6 @@
 import { collection, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { auth, db } from "../../components/firebase/FirebaseConfig";
 import './AssignmentSubmissionsPage.css';
 import { signOut } from "firebase/auth";
@@ -78,15 +78,25 @@ const AssignmentSubmissionsPage: React.FC = () => {
                 <ul>
                     {submissions.map(submission => (
                         <li key={submission.id}>
-                            <p>{submission.response}</p>
+                            <p>Student ID: {submission.studentId}</p>
+                            {submission.submissionLink && (
+                                <p>
+                                    GitHub Link: <a href={submission.submissionLink} target="_blank" rel="noopener noreferrer">{submission.submissionLink}</a>
+                                </p>
+                            )}
+                            {submission.fileUrl && (
+                                <p>
+                                    File: <a href={submission.fileUrl} target="_blank" rel="noopener noreferrer">Download</a>
+                                </p>
+                            )}
                             {!submission.graded ? (
                                 <form onSubmit={(e) => {
                                     e.preventDefault();
                                     const feedback = e.currentTarget.feedback.value;
                                     const grade = e.currentTarget.grade.value;
-                                    handleGradeSubmission(submission.id, feedback, grade);
+                                    handleGradeSubmission(submission.id, feedback, grade as 'IG' | 'G' | 'VG' | 'MVG');
                                 }}>
-                                    <textarea name="feedback" placeholder="Bedömning.."></textarea>
+                                    <textarea name="feedback" placeholder="Bedömning.." required></textarea>
                                     <select name="grade" required>
                                         <option value="IG">IG</option>
                                         <option value="G">G</option>

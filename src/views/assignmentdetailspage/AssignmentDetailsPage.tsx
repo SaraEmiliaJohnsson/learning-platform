@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 import './AssignmentDetailsPage.css';
 import { useAuth } from "../../components/auth/AuthContext";
+import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import { storage } from "../../components/firebase/FirebaseConfig";
 
 
 
@@ -15,7 +17,7 @@ const AssignmentDetailsPage: React.FC = () => {
     const [assignmentTitle, setAssignmentTitle] = useState<string>('');
     const [assignmentDescription, setAssignmentDescription] = useState<string>('');
     const [file, setFile] = useState<File | null>(null);
-    const [githubLink, setGithubLink] = useState<string>('');
+    const [submissionLink, setSubmissionLink] = useState<string>('');
     const [feedback, setFeedback] = useState<string>('');
     const [grade, setGrade] = useState<string>('');
     const [graded, setGraded] = useState<boolean>(false);
@@ -47,7 +49,7 @@ const AssignmentDetailsPage: React.FC = () => {
                 const responseDoc = await getDoc(doc(db, `courses/${courseId}/assignments/${assignmentId}/responses`, currentUser?.uid || ''));
                 if (responseDoc.exists()) {
                     const responseData = responseDoc.data();
-                    setGithubLink(responseData.response || '');
+                    setSubmissionLink(responseData.submissionLink || '');
                     setGraded(responseData.graded || false);
                     setFeedback(responseData.feedback || '');
                     setGrade(responseData.grade || '');
@@ -64,15 +66,24 @@ const AssignmentDetailsPage: React.FC = () => {
         if (!courseId || !assignmentId) return;
 
         try {
-            const responseRef = doc(collection(db, `courses/${courseId}/assignments/${assignmentId}/responses`));
+            let fileUrl = '';
+            if (file) {
+                const storageRef = ref(storage, `assignments/${courseId}/${assignmentId}/${currentUser?.uid}/${file.name}`);
+                const snapshot = await uploadBytes(storageRef, file);
+                fileUrl = await getDownloadURL(snapshot.ref);
+            }
+
+            const responseRef = doc(collection(db, `courses/${courseId}/assignments/${assignmentId}/responses`), currentUser?.uid || '');
             await setDoc(responseRef, {
                 studentId: currentUser?.uid,
-                githubLink: githubLink,
+                submissionLink: submissionLink,
+                fileUrl: fileUrl,
                 submissionTimestamp: new Date(),
                 graded: false,
                 feedback: '',
                 grade: '',
             });
+
             setSubmissionStatus('Your response has been submitted successfully.');
             setTimeout(() => navigate(-1));
 
@@ -96,6 +107,7 @@ const AssignmentDetailsPage: React.FC = () => {
     const handleSignOut = async () => {
         try {
             await signOut(auth);
+            navigate('/');
         } catch (error) {
             console.error('Failed to sign out', error);
         };
@@ -115,7 +127,7 @@ const AssignmentDetailsPage: React.FC = () => {
                     <form className="form-container" onSubmit={handleSubmit}>
                         <label>
                             GitHub Länk:
-                            <input type="url" value={githubLink} onChange={(e) => setGithubLink(e.target.value)} placeholder="Skriv in din GitHub länk" />
+                            <input type="url" value={submissionLink} onChange={(e) => setSubmissionLink(e.target.value)} placeholder="Skriv in din GitHub länk" />
                         </label>
                         <label>
                             Ladda upp en fil:
