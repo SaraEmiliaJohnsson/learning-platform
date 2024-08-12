@@ -68,6 +68,7 @@ const AddLessonPage: React.FC = () => {
     const handleSignOut = async () => {
         try {
             await signOut(auth);
+            navigate('/');
         } catch (error) {
             console.error('Failed to sign out', error);
         }

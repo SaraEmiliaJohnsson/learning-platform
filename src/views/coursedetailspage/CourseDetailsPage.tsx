@@ -142,6 +142,10 @@ const CourseDetailsPage: React.FC = () => {
         }
     };
 
+    const handleViewSubmissions = (assignmentId: string) => {
+        navigate(`/course/${courseId}/assignment/${assignmentId}/submissions`);
+    };
+
     return (
         <div className="course-details-wrapper">
             <header className="course-details-header">
@@ -169,7 +173,10 @@ const CourseDetailsPage: React.FC = () => {
                 <h3>Uppgifter</h3>
                 <ul className="assignments-list">
                     {assignments.map((assignment) => (
-                        <li key={assignment.id}>{assignment.title}</li>
+                        <li key={assignment.id}>
+                            {assignment.title}
+                            <button className="view-submissions-button" onClick={() => handleViewSubmissions(assignment.id)}>Visa Inlämningar</button>
+                        </li>
                     ))}
                 </ul>
                 <h3>Boktips</h3>

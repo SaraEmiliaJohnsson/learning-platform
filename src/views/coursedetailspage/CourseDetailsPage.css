@@ -22,7 +22,7 @@
     color: #00120B;
 }
 
-.header-button-teacher, .course-completed-button {
+.header-button-teacher, .course-completed-button, .view-submissions-button {
     background-color: #00120B; /* Primary dark color */
     color: #e0edfa; /* Slightly darker blue */
     padding: 10px;
@@ -32,7 +32,7 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-.header-button-teacher:hover, .course-completed-button:hover {
+.header-button-teacher:hover, .course-completed-button:hover, .view-submissions-button:hover {
     background-color: #b0c4de; /* Slightly darker blue */
     color: #00120B; /* Primary dark color */
     border: 1.5px solid #00120B;

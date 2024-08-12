@@ -33,6 +33,18 @@ export interface AssignmentResponse {
     grade?: 'IG' | 'G' | 'VG' | 'MVG';
 }
 
+export interface Submission {
+    id: string;
+    studentId: string;
+    response: string;
+    fileUrl?: string;
+    submissionLink?: string;
+    graded: boolean;
+    feedback: string;
+    grade: string;
+    submissionTimestamp: Date;
+}
+
 export interface Lesson {
     id: string;
     title: string;

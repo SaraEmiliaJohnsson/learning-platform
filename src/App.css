@@ -13,6 +13,10 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+main {
+    height: 100vh;
+}
+
 /* Button Styling */
 .logout-button, .back-button {
     background-color: #00120B; /* Primary dark color */
